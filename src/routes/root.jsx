@@ -1,3 +1,8 @@
+import { Outlet, Link } from 'react-router-dom';
+
+
+// <Outlet /> lets root route WHERE we want to render its children routes
+// <Link /> lets clint side routing to update url without request docs from server
 export default function Root() {
   return (
     <>
@@ -29,15 +34,17 @@ export default function Root() {
         <nav>
           <ul>
             <li>
-              <a href={`/contacts/1`}>Your Name</a>
+              <Link to={`/contacts/1`}>Your Name</Link>
             </li>
             <li>
-              <a href={`/contacts/2`}>Your Friend</a>
+              <Link to={`/contacts/2`}>Your Friend</Link>
             </li>
           </ul>
         </nav>
       </div>
-      <div id="detail"></div>
+      <div id="detail">
+        <Outlet />
+      </div>
     </>
   );
 }
