@@ -1,4 +1,4 @@
-import { Outlet, Link, useLoaderdat, useLoaderData, Form } from 'react-router-dom';
+import { Outlet, Link, useLoaderData, Form } from 'react-router-dom';
 import { getContacts, createContact } from '../contacts';
 
 // use a loader function and hook it up in the Root route for loading data from APIs

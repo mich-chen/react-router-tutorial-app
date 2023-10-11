@@ -15,6 +15,7 @@ import ErrorPage from './error-page';
 import Contact, {
   loader as contactLoader,
 } from './routes/contact';
+import EditContact from './routes/edit';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,11 @@ const router = createBrowserRouter([
       {
         path: "contacts/:contactId", // dynamic URL param that can be accessed with params.contactId
         element: <Contact />,
+        loader: contactLoader,
+      },
+      {
+        path: "contacts/:contactId/edit",
+        element: <EditContact />,
         loader: contactLoader,
       }
     ]
