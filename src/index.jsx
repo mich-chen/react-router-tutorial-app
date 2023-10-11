@@ -10,9 +10,11 @@ import reportWebVitals from './reportWebVitals';
 import Root, { 
   loader as rootLoader,
   action as rootAction,
- } from './routes/root';
+} from './routes/root';
 import ErrorPage from './error-page';
-import Contact from './routes/contact';
+import Contact, {
+  loader as contactLoader,
+} from './routes/contact';
 
 const router = createBrowserRouter([
   {
@@ -23,8 +25,9 @@ const router = createBrowserRouter([
     action: rootAction,
     children: [
       {
-        path: "contacts/:contactId",
+        path: "contacts/:contactId", // dynamic URL param that can be accessed with params.contactId
         element: <Contact />,
+        loader: contactLoader,
       }
     ]
   },
