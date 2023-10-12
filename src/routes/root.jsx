@@ -1,4 +1,4 @@
-import { Outlet, Link, useLoaderData, Form } from 'react-router-dom';
+import { Outlet, Link, useLoaderData, Form, redirect } from 'react-router-dom';
 import { getContacts, createContact } from '../contacts';
 
 // use a loader function and hook it up in the Root route for loading data from APIs
@@ -12,7 +12,8 @@ export async function loader() {
 // triggers useLoaderData() hook to update and UI stays in sync with data automatically!
 export async function action() {
   const contact = await createContact();
-  return { contact };
+  // redirect creating new contact to the edit form
+  return redirect(`/contacts/${contact.id}/edit`);
 }
 
 // <Outlet /> lets root route WHERE we want to render its children routes

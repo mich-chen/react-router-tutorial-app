@@ -14,7 +14,6 @@ export async function action({ request, params }) {
   return redirect(`/contacts/${params.contactId}`); // returning "response" that tells the app to change location 
 }
 
-
 export default function EditContact() {
   // loader is contactLoader from routes/contact.jsx, passed here from index.jsx
   // but usually have their own - better practice 
