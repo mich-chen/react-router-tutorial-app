@@ -22,6 +22,7 @@ import {
   DestroyError,
   action as destroyAction 
 } from './routes/destroy';
+import Index from './routes/index';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
     loader: rootLoader,
     action: rootAction,
     children: [
+      {
+        index: true, // tells router when user at parent route's exact path, no other children to render in <Outlet />
+        element: <Index /> // like a landing page child component
+      },
       {
         path: "contacts/:contactId", // dynamic URL param that can be accessed with params.contactId
         element: <Contact />,
