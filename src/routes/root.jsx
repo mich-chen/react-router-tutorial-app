@@ -1,4 +1,12 @@
-import { Outlet, Link, useLoaderData, Form, redirect } from 'react-router-dom';
+import { 
+  Outlet,
+  Link,
+  useLoaderData,
+  Form,
+  redirect,
+  NavLink,
+  useNavigation
+} from 'react-router-dom';
 import { getContacts, createContact } from '../contacts';
 
 // use a loader function and hook it up in the Root route for loading data from APIs
@@ -21,6 +29,14 @@ export async function action() {
 export default function Root() {
   // useLoaderData will auto update when there is change in data (change in state of data) to auto sync data
   const { contacts } = useLoaderData(); // hook the loader data
+
+  // useNavigation to add global pending UI
+  // returns current navigation state one of "idle" || "submitting" || "loading"
+  // React Router behavior will re-load data for changing routes no matter if been there before (therefore not caching behavior)
+  // it does avoid calling loaders for unchanging routes during navigation
+  const navigation = useNavigation();
+
+
   return (
     <>
       <div id="sidebar">
@@ -53,14 +69,23 @@ export default function Root() {
             <ul>
               {contacts.map((contact) => (
                 <li key={contact.id}>
-                  <Link to={`contacts/${contact.id}`}>
+                  <NavLink 
+                    to={`contacts/${contact.id}`}
+                    className={({ isActive, isPending }) => 
+                      isActive
+                      ? "active"
+                      : isPending
+                      ? "pending"
+                      : ""
+                    }
+                    >
                     {contact.first || contact.last ? (
                       <>{contact.first} {contact.last}</>
                     ) : (
                       <i>No Name</i>
                     )}{" "}
                     {contact.favorite && <span>*</span>}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>
@@ -71,7 +96,12 @@ export default function Root() {
           )}
         </nav>
       </div>
-      <div id="detail">
+      <div
+        id="detail"
+        className={
+          navigation.state === "loading" ? "loading" : ""
+        }
+      >
         <Outlet />
       </div>
     </>
