@@ -61,7 +61,7 @@ export default function Contact() {
             action="destroy"
             onSubmit={(event) => {
               if (
-                !event.confirm(
+                !window.confirm(
                   "Please confirm you want to delete this record."
                 )
               ) {

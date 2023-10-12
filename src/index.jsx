@@ -19,6 +19,7 @@ import EditContact, {
   action as editAction,
 } from './routes/edit';
 import { 
+  DestroyError,
   action as destroyAction 
 } from './routes/destroy';
 
@@ -44,6 +45,7 @@ const router = createBrowserRouter([
       {
         path:"contacts/:contactId/destroy",
         action: destroyAction,
+        errorElement: <DestroyError />,
       }
     ]
   },
